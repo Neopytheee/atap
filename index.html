@@ -63,6 +63,19 @@
         🛒 Lihat Keranjang (0)
     </button>
 
+    <div id="detail-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1002; justify-content:center; align-items:center; backdrop-filter: blur(8px);">
+    <div style="background:white; width:90%; max-width:500px; border-radius:24px; overflow:hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position:relative;">
+        <button onclick="closeDetail()" style="position:absolute; top:15px; right:15px; background:rgba(0,0,0,0.5); color:white; border:none; width:35px; height:35px; border-radius:50%; cursor:pointer; font-size:20px; font-weight:bold; z-index:10;">&times;</button>
+        <div id="detail-img" style="width:100%; height:250px; background-size:cover; background-position:center;"></div>
+        <div style="padding:25px;">
+            <h2 id="detail-nama" style="margin:0 0 10px 0; font-size:22px; color:#333;"></h2>
+            <span id="detail-harga" style="display:inline-block; background:var(--forest-green); color:white; padding:5px 12px; border-radius:8px; font-weight:600; margin-bottom:15px;"></span>
+            <p id="detail-deskripsi" style="color:#666; line-height:1.6; font-size:15px; margin-bottom:20px;"></p>
+            <button id="detail-btn-tambah" style="width:100%; padding:15px; border-radius:12px; border:none; background:var(--wa-color); color:white; font-weight:700; cursor:pointer; font-size:16px;">TAMBAH KE KERANJANG</button>
+        </div>
+    </div>
+</div>
+
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
 </body>

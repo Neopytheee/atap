@@ -1,49 +1,103 @@
+// DATABASE LOKASI VILLA
 const daftarVilla = [
-    {id: 100, nama: "Villa Melati"},
-    {id: 101, nama: "Villa Anggrek"},
-    {id: 102, nama: "Villa Mawar"},
-    {id: 103, nama: "Villa Tulip"}
+    { id: 1, nama: "Villa Atap Singgah 1 (Cisarua)" },
+    { id: 2, nama: "Villa Atap Singgah 2 (Puncak)" },
+    { id: 3, nama: "Villa Kayu Manis" },
+    { id: 4, nama: "Villa Evergreen" },
+    { id: 5, nama: "Guest House Utama" }
 ];
 
+// DATABASE LAYANAN (MENU & SEWA)
 const daftarLayanan = [
+    // --- KATEGORI: MAKANAN (KULINER) ---
     {
-        id: 1,
-        nama: "Nasi Goreng Kampung",
-        kategori: "makanan",
-        harga: "Rp 25.000",
-        deskripsi: "Nasi goreng rempah hangat dengan telur mata sapi dan kerupuk.",
-        gambar: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=500&q=80"
+    id: 101,
+    nama: "Nasi Goreng Spesial Atap Singgah",
+    kategori: "makanan",
+    harga: "Rp 35.000",
+    deskripsi: "Nasi goreng premium yang dimasak dengan bumbu rempah rahasia.\n\n" +
+               "📍 Bahan: Beras pilihan, telur dadar suwir, potongan ayam fillet, dan bakso sapi.\n" +
+               "📍 Pelengkap: Acar segar, kerupuk udang besar, dan sambal terasi terpisah.\n" +
+               "📍 Porsi: Kenyang untuk 1 orang dewasa.",
+    gambar: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=500&q=80",
+    tersedia: true
     },
     {
-        id: 2,
-        nama: "Paket Alat BBQ",
+        id: 102,
+        nama: "Mie Goreng Jawa",
+        kategori: "makanan",
+        harga: "Rp 22.000",
+        deskripsi: "Mie goreng khas Jawa dengan sayuran segar dan bakso ayam.",
+        gambar: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400",
+        tersedia: true
+    },
+    {
+        id: 103,
+        nama: "Ayam Bakar Madu",
+        kategori: "makanan",
+        harga: "Rp 35.000",
+        deskripsi: "Ayam bakar bumbu madu disajikan dengan sambal terasi dan lalapan.",
+        gambar: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400",
+        tersedia: false // Contoh menu habis
+    },
+
+    // --- KATEGORI: MINUMAN (COFFEE/NON-COFFEE) ---
+    {
+        id: 201,
+        nama: "Es Kopi Susu Gula Aren",
+        kategori: "minuman",
+        harga: "Rp 18.000",
+        deskripsi: "Kopi espresso pilihan dengan susu segar dan gula aren murni.",
+        gambar: "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=400",
+        tersedia: true
+    },
+    {
+        id: 202,
+        nama: "Matcha Latte Ice",
+        kategori: "minuman",
+        harga: "Rp 20.000",
+        deskripsi: "Teh hijau Jepang kualitas premium dengan susu creamy.",
+        gambar: "https://images.unsplash.com/photo-1536819114556-1e10f967fb61?w=400",
+        tersedia: true
+    },
+
+    // --- KATEGORI: PENYEWAAN ALAT ---
+    {
+        id: 301,
+        nama: "Extra Bed Set",
+        kategori: "sewa",
+        harga: "Rp 75.000",
+        deskripsi: "Kasur tambahan, bantal, dan selimut bersih untuk 1 orang.",
+        gambar: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400",
+        tersedia: true
+    },
+    {
+        id: 302,
+        nama: "Alat Barbeque (Lengkap)",
         kategori: "sewa",
         harga: "Rp 100.000",
-        deskripsi: "Panggangan, arang, dan alat capit (Siap pakai untuk malam akrab).",
-        gambar: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=500&q=80"
+        deskripsi: "Panggangan, arang, jepitan, dan bumbu oles dasar.",
+        gambar: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400",
+        tersedia: true
     },
+
+    // --- KATEGORI: INFORMASI ---
     {
-        id: 3,
-        nama: "Extra Bed Premium",
-        kategori: "sewa",
-        harga: "Rp 50.000",
-        deskripsi: "Kasur tambahan nyaman lengkap dengan bantal dan selimut bersih.",
-        gambar: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-        id: 4,
-        nama: "Kopi Tubruk Spesisial",
-        kategori: "minuman",
-        harga: "Rp 15.000",
-        deskripsi: "Kopi tubruk khas dengan aroma rempah pilihan dan gula aren.",
-        gambar: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=500&q=80"
-    },
-    {
-        id: 99,
-        nama: "Password Wi-Fi",
+        id: 401,
+        nama: "Jam Operasional",
         kategori: "info",
-        harga: "Gratis",
-        deskripsi: "Username: AtapSinggah_Guest | Password: singgahnyaman2024",
-        gambar: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=500&q=80"
+        harga: "Buka 08:00 - 21:00",
+        deskripsi: "Pemesanan di luar jam tersebut akan diproses keesokan harinya.",
+        gambar: "https://images.unsplash.com/photo-1508962914676-134849a727f0?w=400",
+        tersedia: true
     },
+    {
+        id: 402,
+        nama: "Ketentuan Kerusakan",
+        kategori: "info",
+        harga: "Patuhi Aturan",
+        deskripsi: "Setiap kerusakan alat sewa menjadi tanggung jawab penyewa.",
+        gambar: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400",
+        tersedia: true
+    }
 ];

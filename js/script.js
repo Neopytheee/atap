@@ -39,10 +39,10 @@ function renderMenu(filter = 'semua') {
 
         menuBox.innerHTML += `
             <div class="menu-card ${isHabis ? 'out-of-stock' : ''}">
-                <div class="menu-img" style="background-image: url('${item.gambar}')"></div>
+                <div class="menu-img" onclick="bukaDetail(${item.id})" style="background-image: url('${item.gambar}'); cursor:pointer;"></div>
                 <div class="menu-info">
-                    <h3>${item.nama}</h3>
-                    <p>${item.deskripsi}</p>
+                    <h3 onclick="bukaDetail(${item.id})" style="cursor:pointer;">${item.nama}</h3>
+                    <p>${item.deskripsi.substring(0, 60)}...</p>
                     <span class="price">${item.harga}</span>
                     ${!isInfo && !isHabis ? `
                         <input type="text" id="note-${item.id}" placeholder="Catatan: pedas / extra bantal..." class="note-input">
@@ -53,7 +53,7 @@ function renderMenu(filter = 'semua') {
                     ` : `
                         <div class="order-controls">
                             <div style="width: 70px;"></div>
-                            <button class="btn-wa info-btn" disabled>${isHabis ? 'STOK HABIS' : 'INFO LAYANAN'}</button>
+                            <button class="btn-wa info-btn" onclick="bukaDetail(${item.id})">${isHabis ? 'STOK HABIS' : 'LIHAT INFO'}</button>
                         </div>
                     `}
                 </div>
@@ -61,24 +61,55 @@ function renderMenu(filter = 'semua') {
     });
 }
 
+// --- FITUR DETAIL POP-UP ---
+function bukaDetail(id) {
+    const item = daftarLayanan.find(obj => obj.id === id);
+    if (!item) return;
+
+    document.getElementById('detail-nama').innerText = item.nama;
+    document.getElementById('detail-harga').innerText = item.harga;
+    document.getElementById('detail-deskripsi').style.whiteSpace = "pre-line";
+    document.getElementById('detail-deskripsi').innerText = item.deskripsi;
+    document.getElementById('detail-img').style.backgroundImage = `url('${item.gambar}')`;
+
+    const btnTambah = document.getElementById('detail-btn-tambah');
+    if (item.kategori === 'info' || item.tersedia === false) {
+        btnTambah.style.display = 'none';
+    } else {
+        btnTambah.style.display = 'block';
+        btnTambah.onclick = function() {
+            tambahKeKeranjang(item.id);
+            closeDetail();
+        };
+    }
+    document.getElementById('detail-modal').style.display = 'flex';
+}
+
+function closeDetail() {
+    document.getElementById('detail-modal').style.display = 'none';
+}
+
+// --- FITUR KERANJANG ---
 function tambahKeKeranjang(id) {
     const item = daftarLayanan.find(obj => obj.id === id);
-    const qtyVal = document.getElementById(`qty-${id}`).value;
-    const noteVal = document.getElementById(`note-${id}`).value || "-";
-    const qty = parseInt(qtyVal);
+    const qtyInput = document.getElementById(`qty-${id}`);
+    const noteInput = document.getElementById(`note-${id}`);
+    
+    // Ambil qty & note (cek apakah elemen ada, jika dari detail modal mungkin null)
+    const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+    const note = (noteInput && noteInput.value) ? noteInput.value : "-";
     
     if (qty < 1) return;
 
-    const index = keranjang.findIndex(k => k.id === id && k.note === noteVal);
+    const index = keranjang.findIndex(k => k.id === id && k.note === note);
     if (index > -1) {
         keranjang[index].qty += qty;
     } else {
-        keranjang.push({ ...item, qty, note: noteVal });
+        keranjang.push({ ...item, qty, note });
     }
     
-    // Reset Input
-    document.getElementById(`qty-${id}`).value = 1;
-    document.getElementById(`note-${id}`).value = "";
+    if(qtyInput) qtyInput.value = 1;
+    if(noteInput) noteInput.value = "";
     
     updateFloatingButton();
     alert(`✅ ${item.nama} masuk keranjang!`);
@@ -123,7 +154,7 @@ function renderCartItems() {
                 </div>
                 <div style="text-align:right;">
                     <div style="font-size:14px; font-weight:600; margin-bottom:8px;">Rp ${subtotal.toLocaleString('id-ID')}</div>
-                    <button onclick="hapusItem(${index})" style="background:var(--danger); color:white; border:none; width:32px; height:32px; border-radius:8px; cursor:pointer; font-weight:bold; transition:0.2s;">
+                    <button onclick="hapusItem(${index})" style="background:var(--danger); color:white; border:none; width:32px; height:32px; border-radius:8px; cursor:pointer; font-weight:bold;">
                         ${item.qty > 1 ? '−' : '🗑️'}
                     </button>
                 </div>
@@ -169,6 +200,7 @@ function sendWA() {
                   `------------------------------------------\n` +
                   `💵 *Total Estimasi:* Rp ${totalBayar.toLocaleString('id-ID')}\n` +
                   `------------------------------------------\n` +
+                  `--! Wajib Isi Nama Pemesan !--\n\n` +
                   `Mohon segera diproses. Terima kasih!`;
 
     window.open(`https://wa.me/6285975409429?text=${encodeURIComponent(pesan)}`, '_blank');
