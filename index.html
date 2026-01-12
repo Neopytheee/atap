@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atap-Singgah | Katalog Layanan Digital</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">Atap<span>Singgah</span></div>
+            <div class="wa-info">Layanan: <strong>0812-xxxx-xxxx</strong></div>
+        </nav>
+    </header>
+
+    <section class="hero-simple">
+        <div class="brand-badge">Official Guest Service</div>
+        <h1>Atap<span>Singgah</span></h1>
+        <p>Lengkapi kenyamanan menginap Anda dengan kuliner lezat dan fasilitas tambahan terbaik kami.</p>
+    </section>
+
+    <section class="location-input-section">
+    <div class="input-group">
+        <label for="villa-name">Lokasi / Nama Villa Anda:</label>
+        <select id="villa-name" required>
+            <option value="">-- Pilih Lokasi Villa</option>
+        </select>
+    </div>
+</section>
+
+    <div class="category-filter">
+        <button class="filter-btn active" data-target="semua">Semua</button>
+        <button class="filter-btn" data-target="makanan">Kuliner</button>
+        <button class="filter-btn" data-target="minuman">Coffee/NonCoffee</button>
+        <button class="filter-btn" data-target="sewa">Penyewaan Alat</button>
+        <button class="filter-btn" data-target="info">Informasi</button>
+    </div>
+
+    <section class="menu-container">
+        <div class="menu-grid" id="menu-box"></div>
+    </section>
+
+    <footer class="main-footer">
+        <p>&copy; 2024 <strong>Atap-Singgah</strong>. Dikelola untuk kenyamanan Anda.</p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
