@@ -34,8 +34,8 @@
     <div class="category-filter">
         <button class="filter-btn active" data-target="semua">Semua</button>
         <button class="filter-btn" data-target="makanan">Kuliner</button>
-        <button class="filter-btn" data-target="minuman">Coffee/NonCoffee</button>
-        <button class="filter-btn" data-target="sewa">Penyewaan Alat</button>
+        <button class="filter-btn" data-target="minuman">Minuman</button>
+        <button class="filter-btn" data-target="sewa">Penyewaan</button>
         <button class="filter-btn" data-target="info">Informasi</button>
     </div>
 
@@ -43,14 +43,39 @@
         <div class="menu-grid" id="menu-box"></div>
     </section>
 
-    <div id="cart-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1001; justify-content:center; align-items:center; backdrop-filter: blur(5px);">
-        <div style="background:white; width:92%; max-width:400px; border-radius:24px; padding:25px; max-height:85vh; overflow-y:auto; box-shadow: 0 25px 50px rgba(0,0,0,0.3);">
-            <h2 style="margin-bottom:15px; border-bottom:2px solid var(--forest-green); padding-bottom:10px; font-size: 18px; display:flex; align-items:center; gap:10px;">🛒 Rincian Pesanan</h2>
-            <div id="cart-items-list"></div>
-            <div id="cart-total-price" style="margin-top: 20px; font-weight: 700; font-size: 18px; text-align: right; color: var(--forest-green); border-top: 1px dashed #ddd; padding-top: 15px;"></div>
-            <div style="margin-top:25px; display:flex; gap:12px;">
-                <button onclick="toggleModal()" style="flex:1; padding:14px; border-radius:14px; border:1px solid #ddd; background:#f9f9f9; font-weight: 600; cursor: pointer;">Kembali</button>
-                <button onclick="sendWA()" style="flex:2; padding:14px; border-radius:14px; border:none; background:var(--wa-color); color:white; font-weight:700; cursor: pointer; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);">Kirim via WA</button>
+    <div id="cart-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <h2>🛒 Rincian Pesanan</h2>
+        
+        <div style="margin-bottom: 10px;">
+            <label style="font-size: 12px; font-weight: 600;">Nama Pemesan:</label>
+            <input type="text" id="customer-name" placeholder="Tulis nama Anda..." class="note-input">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="font-size: 12px; font-weight: 600;">Catatan Tambahan (Opsional):</label>
+            <textarea id="global-note" placeholder="Contoh: Sambal dipisah, extra bantal, dll..." class="note-input" style="height: 80px; resize: none;"></textarea>
+        </div>
+
+        <div id="cart-items-list"></div>
+        <div id="cart-total-price" class="total-price-box"></div>
+        
+        <div class="modal-actions" style="margin-top:20px; display:flex; gap:10px;">
+            <button onclick="toggleModal()" class="btn-secondary" style="flex:1; padding:12px; border-radius:10px; cursor:pointer;">Kembali</button>
+            <button onclick="sendWA()" class="btn-wa" style="flex:2; padding:12px; border-radius:10px;">Kirim Pesanan</button>
+        </div>
+    </div>
+</div>
+
+    <div id="detail-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content detail-card">
+            <button onclick="closeDetail()" class="close-btn">&times;</button>
+            <div id="detail-img" class="detail-img-box"></div>
+            <div class="detail-info-padding">
+                <h2 id="detail-nama"></h2>
+                <span id="detail-harga" class="price-tag"></span>
+                <p id="detail-deskripsi"></p>
+                <button id="detail-btn-tambah" class="btn-wa" style="width:100%; padding: 15px; font-size: 16px;">TAMBAH KE KERANJANG</button>
             </div>
         </div>
     </div>
@@ -62,19 +87,6 @@
     <button id="floating-cart" onclick="toggleModal()" style="position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: var(--wa-color); color: white; padding: 16px 32px; border-radius: 50px; border: none; font-weight: 700; box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4); display: none; z-index: 999; cursor: pointer; align-items: center; gap: 12px; font-size: 15px; transition: 0.3s;">
         🛒 Lihat Keranjang (0)
     </button>
-
-    <div id="detail-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1002; justify-content:center; align-items:center; backdrop-filter: blur(8px);">
-    <div style="background:white; width:90%; max-width:500px; border-radius:24px; overflow:hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.4); position:relative;">
-        <button onclick="closeDetail()" style="position:absolute; top:15px; right:15px; background:rgba(0,0,0,0.5); color:white; border:none; width:35px; height:35px; border-radius:50%; cursor:pointer; font-size:20px; font-weight:bold; z-index:10;">&times;</button>
-        <div id="detail-img" style="width:100%; height:250px; background-size:cover; background-position:center;"></div>
-        <div style="padding:25px;">
-            <h2 id="detail-nama" style="margin:0 0 10px 0; font-size:22px; color:#333;"></h2>
-            <span id="detail-harga" style="display:inline-block; background:var(--forest-green); color:white; padding:5px 12px; border-radius:8px; font-weight:600; margin-bottom:15px;"></span>
-            <p id="detail-deskripsi" style="color:#666; line-height:1.6; font-size:15px; margin-bottom:20px;"></p>
-            <button id="detail-btn-tambah" style="width:100%; padding:15px; border-radius:12px; border:none; background:var(--wa-color); color:white; font-weight:700; cursor:pointer; font-size:16px;">TAMBAH KE KERANJANG</button>
-        </div>
-    </div>
-</div>
 
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
