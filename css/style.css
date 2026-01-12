@@ -219,3 +219,19 @@ body {
     .menu-grid { gap: 15px; }
 }
 
+#floating-cart {
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from { bottom: -70px; opacity: 0; }
+    to { bottom: 20px; opacity: 1; }
+}
+
+#floating-cart:hover {
+    background: #1eb954;
+    transform: translateX(-50%) scale(1.05);
+}
