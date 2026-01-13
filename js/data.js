@@ -1,10 +1,26 @@
 // DATABASE LOKASI VILLA
 const daftarVilla = [
-    { id: 1, nama: "Villa Atap Singgah 1 (Cisarua)" },
-    { id: 2, nama: "Villa Atap Singgah 2 (Puncak)" },
-    { id: 3, nama: "Villa Kayu Manis" },
-    { id: 4, nama: "Villa Evergreen" },
-    { id: 5, nama: "Guest House Utama" }
+    { id: 1, nama: "Alaya" },
+    { id: 2, nama: "Gunawan" },
+    { id: 3, nama: "Maris" },
+    { id: 4, nama: "Putih" },
+    { id: 5, nama: "Yudistira" },
+    { id: 6, nama: "You & Me"},
+    { id: 7, nama: "Bumi Ratu"},
+    { id: 8, nama: "Bumi Ami"},
+    { id: 9, nama: "Aminara"},
+    { id: 10, nama: "Lemon"},
+    { id: 11, nama: "Puri"},
+    { id: 12, nama: "Savira"},
+    { id: 13, nama: "Bola Popu"},
+    { id: 14, nama: "Kaca 1"},
+    { id: 15, nama: "Kaca 2"},
+    { id: 16, nama: "Kaca 3"},
+    { id: 17, nama: "Kaca 4"},
+    { id: 18, nama: "Cabin 1"},
+    { id: 19, nama: "Cabin 2"},
+    { id: 20, nama: "Pm 1"},
+    { id: 21, nama: "Pm 2"},
 ];
 
 // DATABASE LAYANAN (MENU & SEWA)
@@ -39,6 +55,15 @@ const daftarLayanan = [
         deskripsi: "Ayam bakar bumbu madu disajikan dengan sambal terasi dan lalapan.",
         gambar: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400",
         tersedia: false // Contoh menu habis
+    },
+    {
+        id: 104,
+        nama: "Capcay Kuah",
+        kategori: "makanan",
+        harga: "Rp 25.000",
+        deskripsi: "Sayuran segar tumis dengan kuah kaldu ringan dan potongan ayam.",
+        gambar: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=400",
+        tersedia: true
     },
 
     // --- KATEGORI: MINUMAN (COFFEE/NON-COFFEE) ---

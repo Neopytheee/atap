@@ -187,11 +187,17 @@ function sendWA() {
         return;
     }
 
-    // MEMBUAT ORDER ID UNIK (Contoh: AS-240521-X9)
-    const tgl = new Date();
-    const formatTgl = tgl.toISOString().slice(2, 10).replace(/-/g, ''); // Ambil YYMMDD
-    const randomID = Math.random().toString(36).substring(2, 5).toUpperCase(); // 3 Karakter acak
-    const orderID = `AS-${formatTgl}-${randomID}`;
+    // --- LOGIKA ORDER ID ALA GRAB/GOJEK ---
+    // Menghasilkan format seperti: AS-G7B2-9X
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // Tanpa I, O, 1, 0 agar tidak bingung baca
+    let part1 = "";
+    let part2 = "";
+    for (let i = 0; i < 4; i++) part1 += chars.charAt(Math.floor(Math.random() * chars.length));
+    for (let i = 0; i < 2; i++) part2 += chars.charAt(Math.floor(Math.random() * chars.length));
+    
+    const orderID = `AS-${part1}-${part2}`; 
+    // Hasil contoh: AS-K79W-M2
+    // --------------------------------------
 
     let rincian = "";
     let grandTotal = 0;
@@ -201,11 +207,11 @@ function sendWA() {
         rincian += `${i + 1}. *${item.nama}* (x${item.qty})\n`;
     });
 
+    const tgl = new Date();
     const jam = tgl.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
     
-    // FORMAT PESAN DENGAN ORDER ID
     const pesan = `🏨 *PESANAN BARU - ATAP SINGGAH*\n` +
-                  `🆔 *Order ID:* #${orderID}\n` +
+                  `🆔 *Order ID: ${orderID}*\n` +
                   `------------------------------------------\n` +
                   `👤 *Pemesan:* ${nama}\n` +
                   `📍 *Lokasi:* *${villa}*\n` +
@@ -216,7 +222,7 @@ function sendWA() {
                   `------------------------------------------\n` +
                   `💵 *Total Estimasi:* Rp ${grandTotal.toLocaleString()}\n` +
                   `------------------------------------------\n\n` +
-                  `_Silakan simpan Order ID Anda untuk konfirmasi pembayaran._`;
+                  `_Mohon gunakan Order ID di atas saat konfirmasi pembayaran._`;
 
-    window.open(`https://wa.me/6285975409429?text=${encodeURIComponent(pesan)}`, '_blank');
+    window.open(`https://wa.me/6289699404355?text=${encodeURIComponent(pesan)}`, '_blank');
 }
