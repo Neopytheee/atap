@@ -53,7 +53,7 @@ export const daftarMinuman = [
         kategori: "minuman",
         harga: 17000,
         deskripsi: "Jus segar dari pisang pilihan yang manis dan lezat.",
-        gambar: "assets/img/Minuman/Jus_pisang.jpeg",
+        gambar: "assets/img/Minuman/Jus_pisang.png",
     },
     {
         id: 308,
