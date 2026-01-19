@@ -5,7 +5,7 @@ export const daftarMinuman = [
         kategori: "minuman",
         harga: 23000,
         deskripsi: "Espresso dengan tambahan air dingin, menyegarkan dan ringan.",
-        gambar: "assets/img/minuman/Americano_ice.png",
+        gambar: "assets/img/Minuman/Americano_ice.png",
     },
     {
         id: 302,
