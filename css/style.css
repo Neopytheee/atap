@@ -7,8 +7,8 @@
     --dark: #344e41;
     --light-bg: #f8f9fa;
     --white: #ffffff;
-    --wa-color: #25D366;    /* Warna Hijau WhatsApp (Khusus Transaksi) */
-    --cart-dark: #333333;   /* Warna Abu Gelap (Khusus Navigasi Keranjang) */
+    --wa-color: #25D366;
+    --cart-dark: #333333;
     --danger: #e63946;
     --shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
@@ -28,7 +28,7 @@ body {
 }
 
 /* ==========================================================================
-   2. LAYOUT COMPONENTS (Header, Hero, Footer)
+   2. LAYOUT COMPONENTS (Navbar & Hero)
    ========================================================================== */
 .navbar {
     display: flex;
@@ -61,13 +61,6 @@ body {
                 url('https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=1200');
     background-size: cover;
     background-position: center;
-}
-
-.main-footer {
-    text-align: center;
-    padding: 40px 20px;
-    font-size: 13px;
-    color: #888;
 }
 
 /* ==========================================================================
@@ -139,7 +132,7 @@ body {
 .menu-info p { font-size: 13px; color: #666; margin-bottom: 15px; }
 
 /* ==========================================================================
-   5. MODALS & FORMS
+   5. MODAL SYSTEM (Overlay & Base Content)
    ========================================================================== */
 .modal-overlay {
     position: fixed;
@@ -163,22 +156,109 @@ body {
     position: relative;
     max-height: 90vh;
     overflow-y: auto;
-}
-
-.field-group { margin-bottom: 12px; }
-.field-group label { font-size: 12px; font-weight: 600; margin-bottom: 5px; display: block; }
-
-.note-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    font-size: 14px;
-    outline: none;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ==========================================================================
-   6. BUTTONS & CONTROLS
+   6. MODAL DETAIL PRODUK (KHUSUS GAMBAR & INFO DETAIL)
+   ========================================================================== */
+.detail-card {
+    padding: 0 !important; /* Agar gambar menyentuh pinggir atas modal */
+    overflow: hidden;
+}
+
+.detail-img-box {
+    width: 100%;
+    height: 250px; /* TINGGI WAJIB ADA AGAR GAMBAR MUNCUL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #eee;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+}
+
+.detail-info-padding {
+    padding: 20px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#detail-deskripsi {
+    white-space: pre-line;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.price-tag {
+    display: inline-block;
+    margin: 10px 0;
+    color: var(--forest-green);
+    font-weight: 700;
+    font-size: 20px;
+}
+
+/* ==========================================================================
+   7. FORM INPUTS (Dalam Keranjang)
+   ========================================================================== */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.field-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    text-align: left;
+}
+
+.note-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid #eee;
+    border-radius: 12px;
+    font-size: 14px;
+    background: #fdfdfd;
+    box-sizing: border-box;
+}
+
+.note-input:focus {
+    border-color: var(--wa-color);
+    outline: none;
+    background: #fff;
+}
+
+/* ==========================================================================
+   8. BUTTONS & FLOATING CART
    ========================================================================== */
 .btn-wa {
     background: var(--wa-color);
@@ -187,7 +267,7 @@ body {
     border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    padding: 12px;
 }
 
 .btn-secondary {
@@ -200,7 +280,6 @@ body {
 }
 
 .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
-.modal-actions .btn-wa { flex: 2; padding: 12px; }
 
 .order-controls { display: flex; gap: 8px; height: 48px; }
 
@@ -212,7 +291,6 @@ body {
     font-weight: 600;
 }
 
-/* Tombol Melayang Lihat Keranjang (Kontras Abu/Hitam) */
 #floating-cart {
     position: fixed;
     bottom: 25px;
@@ -230,29 +308,12 @@ body {
     cursor: pointer;
     align-items: center;
     gap: 12px;
-    font-size: 15px;
-    transition: all 0.3s ease;
-}
-
-#floating-cart:hover {
-    background: #444444;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-}
-
-#floating-cart:active {
-    transform: translateX(-50%) scale(0.95);
 }
 
 /* ==========================================================================
-   7. UTILITIES & RESPONSIVE
+   9. UTILITIES & RESPONSIVE
    ========================================================================== */
-.price { 
-    font-weight: 700; 
-    color: var(--forest-green); 
-    font-size: 18px; 
-    margin-bottom: 12px; 
-    display: block; 
-}
+.price { font-weight: 700; color: var(--forest-green); font-size: 18px; margin-bottom: 12px; display: block; }
 
 .total-price-box {
     margin-top: 15px;
@@ -266,8 +327,11 @@ body {
     border: 1px dashed var(--sage-green);
 }
 
+.main-footer { text-align: center; padding: 40px 20px; font-size: 13px; color: #888; }
+
 @media (max-width: 600px) {
     .category-filter { justify-content: flex-start; padding: 15px 5%; }
     .menu-grid { padding: 10px 5%; gap: 15px; }
     .hero-simple h1 { font-size: 28px; }
+    .detail-img-box { height: 200px; }
 }
