@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Atap-Singgah | Katalog Layanan Digital</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -22,15 +22,6 @@
         <p>Lengkapi kenyamanan menginap Anda dengan kuliner lezat dan fasilitas tambahan terbaik kami.</p>
     </section>
 
-    <section class="location-input-section">
-        <div class="input-group">
-            <label for="villa-name">Lokasi / Nama Villa Anda:</label>
-            <select id="villa-name" required>
-                <option value="">-- Pilih Lokasi Villa --</option>
-            </select>
-        </div>
-    </section>
-
     <div class="category-filter">
         <button class="filter-btn active" data-target="semua">Semua</button>
         <button class="filter-btn" data-target="makanan">Kuliner</button>
@@ -44,28 +35,37 @@
     </section>
 
     <div id="cart-modal" class="modal-overlay" style="display:none;">
-    <div class="modal-content">
-        <h2>🛒 Rincian Pesanan</h2>
-        
-        <div style="margin-bottom: 10px;">
-            <label style="font-size: 12px; font-weight: 600;">Nama Pemesan:</label>
-            <input type="text" id="customer-name" placeholder="Tulis nama Anda..." class="note-input">
-        </div>
+        <div class="modal-content">
+            <h2>🛒 Rincian Pesanan</h2>
+            
+            <div class="input-container">
+                <div class="field-group">
+                    <label>Lokasi / Nama Villa:</label>
+                    <select id="villa-name" class="note-input">
+                        <option value="">-- Pilih Lokasi Villa --</option>
+                    </select>
+                </div>
 
-        <div style="margin-bottom: 15px;">
-            <label style="font-size: 12px; font-weight: 600;">Catatan Tambahan (Opsional):</label>
-            <textarea id="global-note" placeholder="Contoh: Sambal dipisah, extra bantal, dll..." class="note-input" style="height: 80px; resize: none;"></textarea>
-        </div>
+                <div class="field-group">
+                    <label>Nama Pemesan:</label>
+                    <input type="text" id="customer-name" placeholder="Tulis nama Anda..." class="note-input">
+                </div>
 
-        <div id="cart-items-list"></div>
-        <div id="cart-total-price" class="total-price-box"></div>
-        
-        <div class="modal-actions" style="margin-top:20px; display:flex; gap:10px;">
-            <button onclick="toggleModal()" class="btn-secondary" style="flex:1; padding:12px; border-radius:10px; cursor:pointer;">Kembali</button>
-            <button onclick="sendWA()" class="btn-wa" style="flex:2; padding:12px; border-radius:10px;">Kirim Pesanan</button>
+                <div class="field-group">
+                    <label>Catatan Tambahan (Opsional):</label>
+                    <textarea id="global-note" placeholder="Contoh: Sambal dipisah, extra bantal, dll..." class="note-input" style="height: 70px; resize: none;"></textarea>
+                </div>
+            </div>
+
+            <div id="cart-items-list"></div>
+            <div id="cart-total-price" class="total-price-box"></div>
+            
+            <div class="modal-actions">
+                <button onclick="toggleModal()" class="btn-secondary">Kembali</button>
+                <button onclick="sendWA()" class="btn-wa">Kirim Pesanan</button>
+            </div>
         </div>
     </div>
-</div>
 
     <div id="detail-modal" class="modal-overlay" style="display:none;">
         <div class="modal-content detail-card">
@@ -81,12 +81,15 @@
     </div>
 
     <footer class="main-footer">
-        <p>&copy; 2024 <strong>Atap-Singgah</strong>. Dikelola untuk kenyamanan Anda.</p>
+        <p>&copy; 2026 <strong>Atap-Singgah</strong>. Dikelola untuk kenyamanan Anda.</p>
     </footer>
 
-    <button id="floating-cart" onclick="toggleModal()" style="position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: var(--wa-color); color: white; padding: 16px 32px; border-radius: 50px; border: none; font-weight: 700; box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4); display: none; z-index: 999; cursor: pointer; align-items: center; gap: 12px; font-size: 15px; transition: 0.3s;">
+    <button id="floating-cart" onclick="toggleModal()">
         🛒 Lihat Keranjang (0)
     </button>
+    <!-- <button id="floating-cart" onclick="toggleModal()" style="position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); background: var(--wa-color); color: white; padding: 16px 32px; border-radius: 50px; border: none; font-weight: 700; box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4); display: none; z-index: 999; cursor: pointer; align-items: center; gap: 12px; font-size: 15px; transition: 0.3s;">
+        🛒 Lihat Keranjang (0)
+    </button> -->
 
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
